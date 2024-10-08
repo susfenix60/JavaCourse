@@ -1,3 +1,5 @@
+package lesson1;
+
 public class StringFunner {
 
     public static void main(String[] args) {

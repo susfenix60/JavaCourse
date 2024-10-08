@@ -1,3 +1,5 @@
+package lesson1;
+
 import java.util.Scanner;
 
 public class ConsoleStarter {
@@ -18,9 +20,12 @@ public class ConsoleStarter {
             chosenOption = scanner.nextInt();
             if (chosenOption == 1) {
                 doAddOperation(scanner);
-
+            }
+            if (chosenOption == 2) {
+                doSubtractOperation(scanner);
             }
         }
+        scanner.close();
     }
 
 
@@ -56,4 +61,16 @@ public class ConsoleStarter {
 
     }
 
+    private static void doSubtractOperation(Scanner scanner) {
+
+        System.out.print("Podaj pierwszą liczbe: ");
+        double firstUserNumber = scanner.nextDouble();
+
+        System.out.print("Podaj drugą liczbe: ");
+        double secondUserNumber = scanner.nextDouble();
+
+        double substracted = SimpleCalculator.substract(firstUserNumber, secondUserNumber);
+
+        System.out.println("Wynik = " + substracted);
+    }
 }
