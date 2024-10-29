@@ -13,8 +13,8 @@ import java.util.Scanner;
  * b) Oblicz sumę kodów ASCII znaków znajdujących się na parzystych
  * indeksach w napisie. Następnie znajdź pierwszą liczbę z
  * przedziału <65, 90>, która jest dzielnikiem wyznaczonej wcześniej
- * sumy. Będzie to kod ASCII jednej z dużych liter alfabetu Zlicz,
- * ile w napisie występuje liter większych od wyznaczonej litery.
+ * sumy. Będzie to kod ASCII jednej z dużych liter alfabetu
+ * c) Zlicz, ile w napisie występuje liter większych od wyznaczonej litery.
  * <p>
  * https://www.alpharithms.com/wp-content/uploads/340/ascii-table-alpharithms-scaled.jpg
  */
@@ -29,6 +29,14 @@ public class StringAsciManipulation {
         int[] convertedWord = convertToAscii(retrivedWord);
 
         System.out.println("Converted word:" + Arrays.toString(convertedWord));
+
+        System.out.printf("There are %d odd numbers in %s word \n ", countOddDigits(convertedWord), retrivedWord);
+
+        int sumedOfAllEvenDigitsIndexes = sumOfAllEvenDigitsIndexes(convertedWord);
+
+        System.out.println("sumOfAllEvenDigitsIndexes: " + sumedOfAllEvenDigitsIndexes);
+
+        System.out.println("findNumberWhichIsSumDivider: " + findNumberWhichIsSumDivider(convertedWord, sumedOfAllEvenDigitsIndexes));
     }
 
     private static String retrieveUpperCaseWordFromUser() {
@@ -43,7 +51,7 @@ public class StringAsciManipulation {
         return retrivedWordFromUser;
     }
 
-    // TYMEK ------> [84, 89, 77, 69, 75]
+    // TYMEK ------> [84, 89, 77, 69, 75], sum = 236
     private static int[] convertToAscii(String retrivedWord) {
         byte[] asciiCodeInBytes = retrivedWord.getBytes(StandardCharsets.US_ASCII);
         int[] asciiCodeInNumber = new int[asciiCodeInBytes.length];
@@ -54,9 +62,47 @@ public class StringAsciManipulation {
         return asciiCodeInNumber;
     }
 
+    private static int countOddDigits(int[] convertedWord) {
+        int counter = 0;
+        for (int currentIndex = 0; currentIndex < convertedWord.length; currentIndex++) {
+            int currentDigit = convertedWord[currentIndex];
+            if (currentDigit % 2 == 1) {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
+    private static int sumOfAllEvenDigitsIndexes(int[] usersWord) {
+        int summedIndexDigits = 0;
+        for (int currentIndex = 0; currentIndex < usersWord.length; currentIndex += 2) {
+            summedIndexDigits += usersWord[currentIndex];
+        }
+        return summedIndexDigits;
+    }
+
+    private static int findNumberWhichIsSumDivider(int[] usersWord, int sumedOfAllEvenDigitsIndexes) {
+
+        int minBound = 65;
+        int maxBound = 90;
+
+        for (int currentIndex = 0; currentIndex < usersWord.length; currentIndex++) {
+            int currentAsciiWord = usersWord[currentIndex];
+            if (currentAsciiWord % sumedOfAllEvenDigitsIndexes == 0) {
+                return currentAsciiWord;
+            }
+
+        }
+
+
+        throw new IllegalArgumentException("Not found number witch is sum divider ");
+    }
+
+
     public static void main(String[] args) {
 
         start();
+
 
     }
 }
