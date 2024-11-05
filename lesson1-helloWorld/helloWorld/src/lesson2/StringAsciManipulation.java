@@ -13,7 +13,7 @@ import java.util.Scanner;
  * b) Oblicz sumę kodów ASCII znaków znajdujących się na parzystych
  * indeksach w napisie. Następnie znajdź pierwszą liczbę z
  * przedziału <65, 90>, która jest dzielnikiem wyznaczonej wcześniej
- * sumy. Będzie to kod ASCII jednej z dużych liter alfabetu
+ * * sumy. Będzie to kod ASCII jednej z dużych liter alfabetu
  * c) Zlicz, ile w napisie występuje liter większych od wyznaczonej litery.
  * <p>
  * https://www.alpharithms.com/wp-content/uploads/340/ascii-table-alpharithms-scaled.jpg
@@ -37,6 +37,8 @@ public class StringAsciManipulation {
         System.out.println("sumOfAllEvenDigitsIndexes: " + sumedOfAllEvenDigitsIndexes);
 
         System.out.println("findNumberWhichIsSumDivider: " + findNumberWhichIsSumDivider(convertedWord, sumedOfAllEvenDigitsIndexes));
+
+        System.out.println("Counter: " + countLettersHigherThen(convertedWord, 65));
     }
 
     private static String retrieveUpperCaseWordFromUser() {
@@ -94,8 +96,26 @@ public class StringAsciManipulation {
 
         }
 
+        return -1;
+        // throw new IllegalArgumentException("Not found number witch is sum divider ");
+    }
 
-        throw new IllegalArgumentException("Not found number witch is sum divider ");
+    //Zlicz, ile w napisie występuje liter większych od wyznaczonej litery.
+
+    // TYMEK ------> [84, 89, 77, 69, 75], count = 5
+
+    private static int countLettersHigherThen(int[] usersWord, int minNumber) {
+
+        int counter = 0;
+
+        for (int currentNumberCheck : usersWord) {
+            if (currentNumberCheck > minNumber) {
+                counter = counter + 1;
+            }
+        }
+
+
+        return counter;
     }
 
 
