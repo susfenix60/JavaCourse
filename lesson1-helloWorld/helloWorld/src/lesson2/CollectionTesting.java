@@ -32,6 +32,9 @@ public class CollectionTesting {
         integerSet.add(3);
 
         Integer[] numbers = integerSet.toArray(new Integer[0]);
+        Integer someNumber = 5;
+        int someeNumber = 7;
+        int someNumber2 = someeNumber;
 
         print(Collections.singleton(integerSet));
     }
