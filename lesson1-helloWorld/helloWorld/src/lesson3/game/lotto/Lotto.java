@@ -1,4 +1,4 @@
-package lesson2;
+package lesson3.game.lotto;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ public class Lotto {
 
     private static void startGame() {
 
-        System.out.println("The lotto game has started");
+        System.out.println("The lotto lesson3.game has started");
 
         Set<Integer> userNumbers = retrieveUserNumbers();
         Set<Integer> computerNumbers = retrieveComputerNumbers();
@@ -26,7 +26,7 @@ public class Lotto {
         int winRateFour = calculateStatistics(userNumbers, 4);
         System.out.println("winRateThree: " + winRateThree);
         System.out.println("winRateFour: " + winRateFour);
-        System.out.println("The Lotto game has ended");
+        System.out.println("The Lotto lesson3.game has ended");
     }
 
     private static Set<Integer> retrieveUserNumbers() {
