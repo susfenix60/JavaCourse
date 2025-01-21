@@ -1,4 +1,4 @@
-package lesson2;
+package pl.susfenix.course.backend.simple_java.lesson1;
 
 /**
  * klasa słórząca do rozwiązywania problemów palindroma (wyraz czytany od tyłu i od przodu z tym samym znaczeniem)

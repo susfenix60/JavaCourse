@@ -1,4 +1,4 @@
-package lesson2;
+package pl.susfenix.course.backend.simple_java.lesson1;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

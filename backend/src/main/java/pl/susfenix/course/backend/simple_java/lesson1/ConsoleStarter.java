@@ -1,4 +1,4 @@
-package lesson1;
+package pl.susfenix.course.backend.simple_java.lesson1;
 
 import java.util.Scanner;
 
@@ -30,7 +30,7 @@ public class ConsoleStarter {
 
 
     private static void showMenu() {
-        System.out.println(
+/*        System.out.println(
                 """
                         Witaj w aplikacji KALKULATOR
                         Wybierz co chcesz zrobić:
@@ -44,7 +44,7 @@ public class ConsoleStarter {
                                       
                         WYBIERZ OPCJE:
                         """
-        );
+        );*/
     }
 
     private static void doAddOperation(Scanner scanner) {

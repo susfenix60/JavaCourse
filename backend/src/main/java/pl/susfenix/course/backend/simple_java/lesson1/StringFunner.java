@@ -1,4 +1,4 @@
-package lesson1;
+package pl.susfenix.course.backend.simple_java.lesson1;
 
 public class StringFunner {
 
