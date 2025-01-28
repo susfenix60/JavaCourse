@@ -46,7 +46,7 @@ public class Lotto {
 
         }
 
-        scanner.close();
+        //scanner.close();
         return userNumbers;
     }
 

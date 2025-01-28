@@ -25,7 +25,7 @@ public class ConsoleStarter {
                 doSubtractOperation(scanner);
             }
         }
-        scanner.close();
+        //scanner.close();
     }
 
 

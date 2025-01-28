@@ -48,7 +48,7 @@ public class StringAsciManipulation {
         while (!retrivedWordFromUser.toUpperCase().equals(retrivedWordFromUser)) {
             retrivedWordFromUser = scanner.next();
         }
-        scanner.close();
+        //scanner.close();
 
         return retrivedWordFromUser;
     }
