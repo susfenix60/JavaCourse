@@ -19,7 +19,7 @@ public class TicTacToe {
         System.out.println("address: " + address);
 */
 
-       startGame();
+        startGame();
 
     }
 
@@ -31,17 +31,20 @@ public class TicTacToe {
         int currentPlayerIndex = 0;
         char[][] createdBoard = createABoard();
 
-        boolean isBoardFree = false;
+        boolean isBoardFree = true;
         boolean isWinner = false;
 
-        while (!isWinner || !isBoardFree) {
+        char[][] gameState = createdBoard;
+        while (!isWinner && isBoardFree) {
+            printABoard(gameState);
             currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-            printABoard(createdBoard);
             char currentPlayer = players[currentPlayerIndex];
-            char[][] gameState = makeMove(createdBoard, currentPlayer, scanner);
+            System.out.println("Current player is "+ currentPlayer);
+            gameState = makeMove(createdBoard, currentPlayer, scanner);
             isBoardFree = hasEmptyField(createdBoard);
             isWinner = checkWinner(gameState, currentPlayer);
         }
+        printABoard(gameState );
 
         if (isWinner) {
             System.out.println("The game has ended, the winner player is: " + players[currentPlayerIndex]);
@@ -117,10 +120,10 @@ public class TicTacToe {
 
         while (rowPosition == -1 || colPosition == -1) {
 
-            System.out.println("Please give me row position from 1 to 3.");
+            System.out.print("Please give me row position from 1 to 3.  ");
             rowPosition = scanner.nextInt();
 
-            System.out.println("Please give me column position from 1 to 3.");
+            System.out.print ("Please give me column position from 1 to 3.  ");
             colPosition = scanner.nextInt();
 
             if (!isMovePossible(createdBoard, rowPosition - 1, colPosition - 1)) {
@@ -134,13 +137,15 @@ public class TicTacToe {
         return new int[]{rowPosition - 1, colPosition - 1};
     }
 
-    //TODO: refactor this
+
     private static boolean hasEmptyField(char[][] createdBoard) {
 
-        for (int colIndex = 0; colIndex < 3; colIndex++) {
+        for (int colIndex = 0; colIndex < createdBoard.length; colIndex++) {
 
-            if (createdBoard[colIndex][0] == ' ' || createdBoard[colIndex][1] == ' ' || createdBoard[colIndex][2] == ' ') {
-                return true;
+            for (int rowIndex = 0; rowIndex < createdBoard.length; rowIndex++) {
+                if (createdBoard[colIndex][rowIndex] == ' ') {
+                    return true;
+                }
             }
         }
         return false;
