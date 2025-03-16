@@ -13,8 +13,7 @@ public class PeselInformation {
         boolean isValid = isValid(userInput);
         System.out.println("Your pesel is " + isValid);
         System.out.println("You are a " + extractGender(userInput));
-        System.out.println("You were born in " + extractBirthMonth(userInput));
-
+        System.out.println("You were born on " + extractBirthDay(userInput) + " of " + extractBirthMonth(userInput) + " " + extractFullYear(userInput));
         //System.out.println(LocalDate.now());
         scanner.close();
     }
@@ -29,15 +28,6 @@ public class PeselInformation {
         }
     }
 
-    private static String extractBirthDate(String pesel) {
-
-        int fullYear = extractFullYear(pesel);
-        int month = extractNumericPeselMonth(pesel) %20;
-
-        return null;
-
-    }
-
     private static int extractFullYear(String pesel) {
         int century = extractCentury(pesel);
 
@@ -50,7 +40,23 @@ public class PeselInformation {
         return birthYear;
     }
 
-    //TODO implement extractBirthDay(..)
+    private static String extractBirthDay(String pesel) {
+        char birthDayAsChar1 = pesel.charAt(4);
+        char birthDayAsChar2 = pesel.charAt(5);
+        int birthDay1 = Character.getNumericValue((birthDayAsChar1));
+        int birthDay2 = Character.getNumericValue((birthDayAsChar2));
+        int birthDay = birthDay1 * 10 + birthDay2;
+
+        if (birthDayAsChar2 == 1) {
+            return birthDay + "st";
+        } else if (birthDayAsChar2 == 2) {
+            return birthDay + "nd";
+        } else if (birthDayAsChar2 == 3) {
+            return birthDay + "rd";
+        } else {
+            return birthDay + "th";
+        }
+    }
 
     private static int extractCentury(String pesel) {
         int birthMonth = extractNumericPeselMonth(pesel);
@@ -82,7 +88,7 @@ public class PeselInformation {
 
     private static String extractBirthMonth(String pesel) {
 
-        int birthMonth = extractNumericPeselMonth(pesel) %20;
+        int birthMonth = extractNumericPeselMonth(pesel) % 20;
         switch (birthMonth) {
             case 1:
                 return "January";
