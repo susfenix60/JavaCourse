@@ -1,5 +1,7 @@
 package pl.susfenix.course.backend.simple_java.lesson2;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class PeselInformation {
@@ -11,11 +13,25 @@ public class PeselInformation {
         String userInput = scanner.next();
 
         boolean isValid = isValid(userInput);
+        if (!isValid) {
+            System.out.println("Your pesel is incorrect");
+            scanner.close();
+            return;
+        }
         System.out.println("Your pesel is " + isValid);
         System.out.println("You are a " + extractGender(userInput));
-        System.out.println("You were born on " + extractBirthDay(userInput) + " of " + extractBirthMonth(userInput) + " " + extractFullYear(userInput));
+        System.out.println("You were born on " + extractBirthDayAsPreety(userInput)
+                + " of " + extractBirthMonth(userInput)
+                + " " + extractFullYear(userInput));
         //System.out.println(LocalDate.now());
+        System.out.println("Your age yearly is: " + calculateAgeYearly(userInput));
+        System.out.println("Your age exactly is: " + calculateAge(userInput));
         scanner.close();
+        //00032187368 - 21.03.1900 ---> age: 125, exactly: 125
+        //00032053573 - 20.03.1900 ---> age: 125, exactly: 124
+        //00032285424 - 22.03.1900 ---> age: 125, exactly: 124
+        //00022849298 - 28.02.1900 ---> age: 125, exactly: 125
+        //00041021161 - 10.04.1900 ---> age: 125, exactly: 124
     }
 
     private static String extractGender(String pesel) {
@@ -40,18 +56,26 @@ public class PeselInformation {
         return birthYear;
     }
 
-    private static String extractBirthDay(String pesel) {
+    private static int extractBirthDay(String pesel) {
+
         char birthDayAsChar1 = pesel.charAt(4);
         char birthDayAsChar2 = pesel.charAt(5);
         int birthDay1 = Character.getNumericValue((birthDayAsChar1));
         int birthDay2 = Character.getNumericValue((birthDayAsChar2));
         int birthDay = birthDay1 * 10 + birthDay2;
+        return birthDay;
 
-        if (birthDayAsChar2 == 1) {
+    }
+
+    private static String extractBirthDayAsPreety(String pesel) {
+        int birthDay = extractBirthDay(pesel);
+        int birthDay2 = birthDay % 10;
+
+        if (birthDay2 == 1) {
             return birthDay + "st";
-        } else if (birthDayAsChar2 == 2) {
+        } else if (birthDay2 == 2) {
             return birthDay + "nd";
-        } else if (birthDayAsChar2 == 3) {
+        } else if (birthDay2 == 3) {
             return birthDay + "rd";
         } else {
             return birthDay + "th";
@@ -119,6 +143,29 @@ public class PeselInformation {
 
         }
 
+    }
+
+    private static int calculateAgeYearly(String pesel) {
+        int year = extractFullYear(pesel);
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getYear() - year;
+    }
+
+    private static int calculateAge(String pesel) {
+
+        int month = extractNumericPeselMonth(pesel);
+        int day = extractBirthDay(pesel);
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonth().getValue();
+        int currentDay = currentDate.getDayOfMonth();
+
+        int additionalMinus = 0;
+        if (currentMonth - month < 0) {
+            additionalMinus = 1;
+        } else if (currentMonth == month && currentDay - day < 0) {
+            additionalMinus = 1;
+        }
+        return calculateAgeYearly(pesel) - additionalMinus;
     }
 
     private static boolean isValid(String userInput) {
