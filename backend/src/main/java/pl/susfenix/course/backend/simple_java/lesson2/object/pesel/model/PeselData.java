@@ -69,7 +69,7 @@ public class PeselData extends Object {
 
     @Override
     public int hashCode() {
-       return Objects.hash(birthDay, year, century, month, day, gender);
+        return Objects.hash(birthDay, year, century, month, day, gender);
 
     }
 
@@ -84,6 +84,42 @@ public class PeselData extends Object {
                 ", day=" + day +
                 ", gender='" + gender + '\'' +
                 '}';
+    }
+
+    public String getPrettyBirthDate() {
+        int birthDay = this.birthDay.getDayOfMonth();
+        int birthDay2 = birthDay % 10;
+
+        String sufix = " of " + this.month + " " + this.year;
+
+        if (birthDay2 == 1) {
+            return birthDay + "st" + sufix;
+        } else if (birthDay2 == 2) {
+            return birthDay + "nd" + sufix;
+        } else if (birthDay2 == 3) {
+            return birthDay + "rd" + sufix;
+        } else {
+            return birthDay + "th" + sufix;
+        }
+    }
+
+    public int calculateAgeYearly() {
+        return LocalDate.now().getYear() - this.year;
+    }
+
+    public int calculateAge() {
+
+        LocalDate currentDate = LocalDate.now();
+        int currentMonth = currentDate.getMonth().getValue();
+        int currentDay = currentDate.getDayOfMonth();
+
+        int additionalMinus = 0;
+        if (currentMonth - this.month < 0) {
+            additionalMinus = 1;
+        } else if (currentMonth == this.month && currentDay - this.day < 0) {
+            additionalMinus = 1;
+        }
+        return calculateAgeYearly() - additionalMinus;
     }
 
    /* public static void main(String[] args) {

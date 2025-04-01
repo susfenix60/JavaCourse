@@ -6,6 +6,11 @@ import java.time.LocalDate;
 
 public class PeselExtractor {
     public static PeselData fromPesel(String pesel){
+
+        if (!PeselValidator.isValid(pesel)){
+            throw new IllegalArgumentException("Pesel " + pesel + " is NOT valid");
+        }
+
         int birthDay = extractBirthDay(pesel);
         int century = extractCentury(pesel);
         int fullYear = extractFullYear(pesel);
