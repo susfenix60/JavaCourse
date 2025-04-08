@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 
-public class MainFrame {
+public class OldMainFrame {
 
     private static final List<JButton> GAME_BUTTONS = Arrays.asList(
             createGameButton("Lotto", actionEvent -> openLottoGame())

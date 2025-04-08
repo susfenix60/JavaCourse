@@ -1,9 +1,16 @@
 package pl.susfenix.course.backend.game.tictactoe.model;
 
-public class Player {
-    private char symbol;
+public enum Player {
+    X("Michał", 'X'),
+    O("Tymek", 'O');
 
-    public Player(char symbol) {
+    private final String name;
+    private final char symbol;
+
+    private Player(String name, char symbol){
+
+        this.name = name;
         this.symbol = symbol;
+
     }
 }
