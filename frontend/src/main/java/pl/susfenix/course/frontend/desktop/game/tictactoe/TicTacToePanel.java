@@ -1,6 +1,8 @@
 package pl.susfenix.course.frontend.desktop.game.tictactoe;
 
-import pl.susfenix.course.backend.game.tictactoe.TicTacToeGameState;
+import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
+import pl.susfenix.course.backend.game.tictactoe.model.GameStatus;
+import pl.susfenix.course.backend.game.tictactoe.model.TicTacToeGameState;
 import pl.susfenix.course.backend.game.tictactoe.model.Player;
 import pl.susfenix.course.frontend.desktop.layout.Logger;
 
@@ -15,7 +17,7 @@ public class TicTacToePanel extends JPanel {
     private static final int BOARD_SIZE = 3;
     private final JButton[][] buttons;
 
-    private TicTacToeGameState gameState = new TicTacToeGameState();
+    private TicTacToeApi ticTacToeApi = new TicTacToeApi();
     public TicTacToePanel() {
         super.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
 
@@ -26,7 +28,7 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
-        log.info("START NEW GAME. CURRENT PLAYER IS: " + gameState.getCurrentPlayer());
+        log.info(ticTacToeApi.getGameState().getGameResult().getMessage());
     }
 
     private JButton[][] initializeButtons() {
@@ -52,14 +54,34 @@ public class TicTacToePanel extends JPanel {
                     log.info("Ruch niedozwolony");
                     return;
                 }
-                currentButton.setText(gameState.getCurrentPlayer().name());
+                final int[] buttonIndexes = findButtonIndex(currentButton);
+                final Player currentPlayer = ticTacToeApi.getGameState().getCurrentPlayer();
+
+                final TicTacToeGameState newGameState = ticTacToeApi.makeMove(buttonIndexes[0], buttonIndexes[1]);
+
+                currentButton.setText(String.valueOf(currentPlayer.getSymbol()));
                 currentButton.setEnabled(false);
 
-                final Player nextPlayer = gameState.nextPlayer();
-
-                log.info("CURRENT PLAYER IS: " + nextPlayer);
+                log.info(newGameState.getGameResult().getMessage());
+                if (newGameState.getGameResult().getStatus() == GameStatus.WINNER || newGameState.getGameResult().getStatus() == GameStatus.DRAW){
+                    for (int row = 0; row < buttons.length; row++) {
+                        for (int col = 0; col < buttons.length; col++) {
+                            buttons[row][col].setEnabled(false);
+                        }
+                    }
+                }
             }
         };
         return actionListener;
+    }
+    private int[] findButtonIndex(JButton currentButton) {
+        for (int row = 0; row < buttons.length; row++) {
+            for (int col = 0; col < buttons.length; col++) {
+                if (buttons[row][col] == currentButton) {
+                    return new int[] {row, col};
+                }
+            }
+        }
+        throw new IllegalStateException("Should never happen");
     }
 }

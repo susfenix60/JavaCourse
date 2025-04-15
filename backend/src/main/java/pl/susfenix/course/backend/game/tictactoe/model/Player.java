@@ -7,10 +7,16 @@ public enum Player {
     private final String name;
     private final char symbol;
 
-    private Player(String name, char symbol){
-
+    private Player(String name, char symbol) {
         this.name = name;
         this.symbol = symbol;
+    }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public char getSymbol() {
+        return this.symbol;
     }
 }

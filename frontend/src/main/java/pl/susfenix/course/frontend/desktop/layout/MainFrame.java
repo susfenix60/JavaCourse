@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
 
         final JScrollPane loggerInScrollPane = new JScrollPane(this.logger);
         loggerInScrollPane.setMinimumSize(new Dimension(450,768));
-        super.add(loggerInScrollPane, BorderLayout.SOUTH);
+        super.add(loggerInScrollPane, BorderLayout.EAST);
     }
 
 

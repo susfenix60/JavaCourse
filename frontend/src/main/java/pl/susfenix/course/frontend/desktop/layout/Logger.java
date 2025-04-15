@@ -13,7 +13,7 @@ public class Logger {
     }
 
     private JTextArea createLogger() {
-        JTextArea logger = new JTextArea(5, 50);
+        JTextArea logger = new JTextArea(10, 25);
         logger.setEditable(false);
         return logger;
     }
