@@ -26,4 +26,7 @@ public class Logger {
         logger.append(message + "\n");
 
     }
+    public void clear() {
+        logger.setText(null);
+    }
 }
