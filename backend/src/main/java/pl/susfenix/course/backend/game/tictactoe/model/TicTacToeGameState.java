@@ -17,11 +17,11 @@ public class TicTacToeGameState {
         this.gameResult = gameResult;
     }
 
-    public TicTacToeGameState(TicTacToeGameState otherGameState){
+   /* public TicTacToeGameState(TicTacToeGameState otherGameState){
         this.board = new Board(otherGameState.board);
         this.currentPlayer = otherGameState.getCurrentPlayer();
         this.gameResult = new GameResult(otherGameState.getGameResult());
-    }
+    }*/
 
     public Player getCurrentPlayer() {
         return this.currentPlayer;

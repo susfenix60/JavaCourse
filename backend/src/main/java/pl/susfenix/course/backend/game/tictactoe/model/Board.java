@@ -16,7 +16,14 @@ public class Board {
     }
 
     public Board(Board otherBoard) {
-        this.boardState = Arrays.copyOf(otherBoard.getBoardState(), otherBoard.getBoardState().length);
+        char[][] newBoardState = new char[otherBoard.boardState.length][otherBoard.boardState.length];
+        for (int currentRow = 0; currentRow < otherBoard.boardState.length; currentRow++){
+            for (int currentCol = 0; currentCol < otherBoard.boardState.length; currentCol++){
+                char currentValue = otherBoard.boardState[currentCol][currentRow];
+                newBoardState[currentCol][currentRow] = currentValue;
+            }
+        }
+        this.boardState = newBoardState;
     }
 
     public char[][] getBoardState() {

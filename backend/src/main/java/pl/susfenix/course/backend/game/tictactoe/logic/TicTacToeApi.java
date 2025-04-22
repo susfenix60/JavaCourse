@@ -25,7 +25,7 @@ public class TicTacToeApi {
         newBoard.getBoardState()[rowPosition][colPosition] = gameState.getCurrentPlayer().getSymbol();
 
         Player newPlayer = nextPlayer();
-        GameResult newGameResult = checkWinner();
+        GameResult newGameResult = checkWinner(newBoard, this.gameState.getCurrentPlayer(), newPlayer);
         this.gameState = new TicTacToeGameState(newBoard, newPlayer, newGameResult);
         return this.gameState;
     }
@@ -61,27 +61,27 @@ public class TicTacToeApi {
         return nextPlayer;
     }
 
-    private GameResult checkWinner() {
-        char[][] board = this.gameState.getBoard().getBoardState();
-        char symbol = this.gameState.getCurrentPlayer().getSymbol();
+    private GameResult checkWinner(Board board, Player currentPlayer, Player newPlayer) {
+        char[][] boardState = board.getBoardState();
+        char symbol = currentPlayer.getSymbol();
 
         for (int currentIndex = 0; currentIndex < 3; currentIndex++) {
 
-            if (board[currentIndex][0] == symbol && board[currentIndex][1] == symbol && board[currentIndex][2] == symbol) {
+            if (boardState[currentIndex][0] == symbol && boardState[currentIndex][1] == symbol && boardState[currentIndex][2] == symbol) {
                 return new GameResult(GameStatus.WINNER, "The winner is: " + symbol);
             }
-            if (board[0][currentIndex] == symbol && board[1][currentIndex] == symbol && board[2][currentIndex] == symbol) {
+            if (boardState[0][currentIndex] == symbol && boardState[1][currentIndex] == symbol && boardState[2][currentIndex] == symbol) {
                 return new GameResult(GameStatus.WINNER, "The winner is: " + symbol);
             }
         }
 
-        if (board[0][0] == symbol && board[1][1] == symbol && board[2][2] == symbol) {
+        if (boardState[0][0] == symbol && boardState[1][1] == symbol && boardState[2][2] == symbol) {
             return new GameResult(GameStatus.WINNER, "The winner is: " + symbol);
-        } else if (board[0][2] == symbol && board[1][1] == symbol && board[2][0] == symbol) {
+        } else if (boardState[0][2] == symbol && boardState[1][1] == symbol && boardState[2][0] == symbol) {
             return new GameResult(GameStatus.WINNER, "The winner is: " + symbol);
         } else {
             if (hasEmptyField()){
-                return new GameResult(GameStatus.IN_GAME, "Next turn, current player is: " + symbol);
+                return new GameResult(GameStatus.IN_GAME, "Next turn, current player is: " + newPlayer.getSymbol());
             }
             return new GameResult(GameStatus.DRAW, "The game has ended with a draw.");
         }
