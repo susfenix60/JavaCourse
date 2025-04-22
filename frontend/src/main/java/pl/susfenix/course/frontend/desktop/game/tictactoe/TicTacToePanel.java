@@ -1,6 +1,7 @@
 package pl.susfenix.course.frontend.desktop.game.tictactoe;
 
 import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
+import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFactory;
 import pl.susfenix.course.backend.game.tictactoe.model.GameStatus;
 import pl.susfenix.course.backend.game.tictactoe.model.TicTacToeGameState;
 import pl.susfenix.course.backend.game.tictactoe.model.Player;
@@ -17,7 +18,7 @@ public class TicTacToePanel extends JPanel {
     private static final int BOARD_SIZE = 3;
     private final JButton[][] buttons;
 
-    private TicTacToeApi ticTacToeApi = new TicTacToeApi();
+    private TicTacToeApi ticTacToeApi;
     public TicTacToePanel() {
         super.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
 
@@ -28,6 +29,7 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
+        this.ticTacToeApi = TicTacToeFactory.createInitial();
         log.info(ticTacToeApi.getGameState().getGameResult().getMessage());
     }
 

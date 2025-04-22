@@ -5,12 +5,6 @@ public class TicTacToeGameState {
     private Player currentPlayer;
     private GameResult gameResult;
 
-    public TicTacToeGameState(){
-        this.board = new Board();
-        this.currentPlayer = Player.X;
-        this.gameResult = new GameResult(GameStatus.INICIALAZED, "new game started. current player is: " + currentPlayer.getSymbol());
-    }
-
     public TicTacToeGameState(Board board, Player player, GameResult gameResult){
         this.board = new Board(board);
         this.currentPlayer = player;

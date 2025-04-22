@@ -1,18 +1,12 @@
 package pl.susfenix.course.backend.game.tictactoe.model;
 
-import java.util.Arrays;
-
 public class Board {
-    private static final char[][] INITIAL_STATE = new char[][]{
-            {' ', ' ', ' '},
-            {' ', ' ', ' '},
-            {' ', ' ', ' '}
-    };
 
-    private char[][] boardState = INITIAL_STATE;
 
-    public Board() {
-        this.boardState = INITIAL_STATE;
+    private final char[][] boardState;
+
+    public Board(char[][] boardState) {
+        this.boardState = boardState;
     }
 
     public Board(Board otherBoard) {
