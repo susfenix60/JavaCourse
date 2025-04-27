@@ -1,5 +1,6 @@
 package pl.susfenix.course.frontend.desktop.lotto;
 
+import pl.susfenix.course.backend.game.lotto.Lotto;
 import pl.susfenix.course.frontend.desktop.layout.Logger;
 
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class LottoPanel extends JPanel {
         this.resultLabel = new JLabel("Wynik: ");
         this.winnerNumbersLabel = new JLabel("Wylosowane liczby: ");
         this.randomActionButton = new JButton("Losuj");
+
 
         this.checkBoxes = new JCheckBox[49]; // 49 liczb do wyboru
         for (int i = 0; i < checkBoxes.length; i++) {
@@ -72,6 +74,7 @@ public class LottoPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 final Set<Integer> selectedNumbers = new TreeSet<>();
+                Set<Integer> computerNumbers = new TreeSet<>();
 
                 for (JCheckBox checkBox : checkBoxes) {
                     if (checkBox.isSelected()) {
@@ -82,11 +85,23 @@ public class LottoPanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "Podales mniej niz 6 liczb!");
                     return;
                 }
+                else if (selectedNumbers.size() > 6) {
+                    JOptionPane.showMessageDialog(null, "Podales wiecej niz 6 liczb!");
+                    return;
+                }
+
+                computerNumbers = Lotto.retrieveComputerNumbers();
 
                 userNumbersLabel.setText("Liczby użytkownika: " + selectedNumbers);
+                logger.info("Liczby użytkownika: " + selectedNumbers);
 
-                logger.info("YEEP");
-                // Lotto.startGame(selectedNumbers);
+                winnerNumbersLabel.setText("Wylosowane liczby: " + computerNumbers);
+                logger.info("Wylosowane liczby: " + computerNumbers);
+
+                resultLabel.setText("Liczba trafień wynosi: " + Lotto.countHits(computerNumbers, selectedNumbers));
+                logger.info("Liczba trafień wynosi: " + Lotto.countHits(computerNumbers, selectedNumbers));
+
+                //Lotto.startGame(selectedNumbers);
 
             }
         };

@@ -1,6 +1,7 @@
 package pl.susfenix.course.frontend.desktop.layout;
 
 import pl.susfenix.course.frontend.desktop.game.tictactoe.TicTacToePanel;
+import pl.susfenix.course.frontend.desktop.lotto.LottoPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,9 +38,7 @@ public class MainFrame extends JFrame {
         JMenu gameMenu = new JMenu("Gry");
 
         JMenuItem lottoItem = new JMenuItem("Lotto");
-       /* lottoItem.addActionListener(e -> {
-            gameFrontendApi.startLotto()
-        });*/
+        lottoItem.addActionListener(e -> refreshGamePanel(new LottoPanel()));
 
         JMenuItem ticTacToeItem = new JMenuItem("Kółko i Krzyżyk");
         ticTacToeItem.addActionListener(e -> refreshGamePanel(new TicTacToePanel()));

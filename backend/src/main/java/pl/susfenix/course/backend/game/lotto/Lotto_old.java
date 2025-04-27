@@ -1,11 +1,19 @@
 package pl.susfenix.course.backend.game.lotto;
 
 
-import java.util.*;
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.TreeSet;
 
-public class Lotto {
+public class Lotto_old {
 
-    public static void startGame(Set<Integer> selectedNumbers) {
+    public static void main(String[] args) {
+
+        startGame();
+    }
+
+    private static void startGame() {
 
         System.out.println("The lotto lesson3.game has started");
 
@@ -46,7 +54,7 @@ public class Lotto {
         return userNumbers;
     }
 
-    public static Set<Integer> retrieveComputerNumbers() {
+    private static Set<Integer> retrieveComputerNumbers() {
         Random random = new Random();
         Set<Integer> computerNumbers = new TreeSet<>();
         while (computerNumbers.size() < 6) {
@@ -58,7 +66,7 @@ public class Lotto {
         return computerNumbers;
     }
 
-    public static int countHits(Set<Integer> computerNumbers, Set<Integer> userNumbers) {
+    private static int countHits(Set<Integer> computerNumbers, Set<Integer> userNumbers) {
 
         int rightHits = 0;
 
@@ -86,14 +94,8 @@ public class Lotto {
         return rightHits;
     }
 
-    /*
-    W Lotto Plus każda wygrana ma stałą wysokość.
-    Trafienie 6 z 49 liczb oznacza wygraną 1 000 000 zł.
-    „Piątka” to 3500 zł,
-    „czwórka” – 100 zł,
-    „trójka” – 10 zł.
-     */
-    public static double determineWinMoney(int hitsCounter) {
+    //W Lotto Plus każda wygrana ma stałą wysokość. Trafienie 6 z 49 liczb oznacza wygraną 1 000 000 zł. „Piątka” to 3500 zł, „czwórka” – 100 zł, a „trójka” – 10 zł.
+    private static double determineWinMoney(int hitsCounter) {
 
         double win = 0;
 
@@ -105,9 +107,6 @@ public class Lotto {
             win = 100;
         } else if (hitsCounter == 3) {
             win = 10;
-        }
-        else {
-            win = 0;
         }
 
         return win;

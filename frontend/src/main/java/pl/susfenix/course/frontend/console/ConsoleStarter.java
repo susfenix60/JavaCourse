@@ -57,10 +57,10 @@ public class ConsoleStarter {
                     CollectionTesting.main(null);
                     break;
                 }
-                case 7: {
+                /*case 7: {
                     Lotto.main(null);
                     break;
-                }
+                }*/
                 case 8: {
                     TicTacToe.main(null);
                     break;
