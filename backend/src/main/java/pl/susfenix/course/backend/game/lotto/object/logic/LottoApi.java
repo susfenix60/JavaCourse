@@ -15,7 +15,17 @@ public class LottoApi {
         int winRateThree = calculateStatistics(userNumbers, 3);
         int winRateFour = calculateStatistics(userNumbers, 4);
 
-        return new LottoGameState(userNumbers, computerNumbers, hits, wonMoney, winRateThree, winRateFour);
+
+        //return LottoGameState.of(userNumbers, computerNumbers, hits, wonMoney, winRateThree, winRateFour);
+        //return new LottoGameState(userNumbers, computerNumbers, hits, wonMoney, winRateThree, winRateFour);
+        return LottoGameState.builder()
+                .computerNumbers(computerNumbers)
+                .winRateThree(winRateThree)
+                .userNumbers(userNumbers)
+                .wonMoney(wonMoney)
+                .hits(hits)
+                .winRateFour(winRateFour)
+                .build();
     }
 
     private static Set<Integer> retrieveComputerNumbers() {
