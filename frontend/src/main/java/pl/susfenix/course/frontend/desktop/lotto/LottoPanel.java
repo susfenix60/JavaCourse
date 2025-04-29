@@ -18,12 +18,14 @@ public class LottoPanel extends JPanel {
     private final JLabel resultLabel;
     private final JLabel winnerNumbersLabel;
     private final JButton randomActionButton;
+    private final JLabel wonMoneyLabel;
 
     public LottoPanel() {
         this.userNumbersLabel = new JLabel("Liczby użytkownika: ");
-        this.resultLabel = new JLabel("Wynik: ");
+        this.resultLabel = new JLabel("Trafiłeś: ");
         this.winnerNumbersLabel = new JLabel("Wylosowane liczby: ");
         this.randomActionButton = new JButton("Losuj");
+        this.wonMoneyLabel = new JLabel("Wygrałeś: ");
 
 
         this.checkBoxes = new JCheckBox[49]; // 49 liczb do wyboru
@@ -57,11 +59,15 @@ public class LottoPanel extends JPanel {
         JPanel resultDataPanel = new JPanel();
         resultDataPanel.add(resultLabel);
 
-        final JPanel controlPanel = new JPanel(new GridLayout(4, 1,2,2));
+        JPanel wonMoneyPanel = new JPanel();
+        wonMoneyPanel.add(wonMoneyLabel);
+
+        final JPanel controlPanel = new JPanel(new GridLayout(5, 1,2,2));
         controlPanel.add(actionPanel);
         controlPanel.add(userDataPanel);
         controlPanel.add(winnerDataPanel);
         controlPanel.add(resultDataPanel);
+        controlPanel.add(wonMoneyPanel);
 
 
         super.setLayout(new GridLayout(2, 1,2,2));
@@ -74,7 +80,6 @@ public class LottoPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 final Set<Integer> selectedNumbers = new TreeSet<>();
-                Set<Integer> computerNumbers = new TreeSet<>();
 
                 for (JCheckBox checkBox : checkBoxes) {
                     if (checkBox.isSelected()) {
@@ -90,16 +95,20 @@ public class LottoPanel extends JPanel {
                     return;
                 }
 
-                computerNumbers = Lotto.retrieveComputerNumbers();
-
                 userNumbersLabel.setText("Liczby użytkownika: " + selectedNumbers);
                 logger.info("Liczby użytkownika: " + selectedNumbers);
 
+                Set<Integer> computerNumbers = Lotto.retrieveComputerNumbers();
                 winnerNumbersLabel.setText("Wylosowane liczby: " + computerNumbers);
                 logger.info("Wylosowane liczby: " + computerNumbers);
 
-                resultLabel.setText("Liczba trafień wynosi: " + Lotto.countHits(computerNumbers, selectedNumbers));
-                logger.info("Liczba trafień wynosi: " + Lotto.countHits(computerNumbers, selectedNumbers));
+                int countedHits = Lotto.countHits(computerNumbers, selectedNumbers);
+                resultLabel.setText("Liczba trafień wynosi: " + countedHits);
+                logger.info("Liczba trafień wynosi: " + countedHits);
+
+                double winMoney = Lotto.determineWinMoney(countedHits);
+                wonMoneyLabel.setText("Wygrałeś " + winMoney + " zł.");
+                logger.info("Wygrałeś " + winMoney + " zł.");
 
                 //Lotto.startGame(selectedNumbers);
 
