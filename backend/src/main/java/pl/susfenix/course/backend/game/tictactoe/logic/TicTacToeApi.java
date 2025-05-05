@@ -31,7 +31,7 @@ public class TicTacToeApi {
         return this.gameState;
     }
 
-    private boolean isMovePossible(int row, int col) {
+    public boolean isMovePossible(int row, int col) {
 
         if (row < 0 || row >= 3) {
             return false;

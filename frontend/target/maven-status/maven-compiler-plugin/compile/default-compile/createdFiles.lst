@@ -1,5 +1,15 @@
 pl\susfenix\course\frontend\desktop\lotto\LottoPanel.class
+pl\susfenix\course\frontend\console\game\tictactoe\TicTacToeConsole.class
 pl\susfenix\course\frontend\desktop\DesktopStarter.class
-pl\susfenix\course\frontend\desktop\MainFrame.class
 pl\susfenix\course\frontend\FrontendStarter.class
+pl\susfenix\course\frontend\desktop\layout\MainFrame.class
+pl\susfenix\course\frontend\desktop\lotto\ObjectLottoPanel$1.class
+pl\susfenix\course\frontend\desktop\lotto\LottoPanel$1.class
+pl\susfenix\course\frontend\desktop\OldMainFrame.class
+pl\susfenix\course\frontend\console\game\lotto\LottoConsole.class
+pl\susfenix\course\frontend\desktop\layout\Logger.class
+pl\susfenix\course\frontend\desktop\game\tictactoe\TicTacToePanel.class
+pl\susfenix\course\frontend\desktop\game\tictactoe\TicTacToePanel$1.class
+pl\susfenix\course\frontend\desktop\lotto\ObjectLottoPanel.class
 pl\susfenix\course\frontend\console\ConsoleStarter.class
+pl\susfenix\course\frontend\console\layout\ScannerHolder.class

@@ -1,8 +1,6 @@
-package pl.susfenix.course.frontend.desktop.lotto;
+package pl.susfenix.course.frontend.desktop.game.lotto;
 
 import pl.susfenix.course.backend.game.lotto.Lotto;
-import pl.susfenix.course.backend.game.lotto.object.logic.LottoApi;
-import pl.susfenix.course.backend.game.lotto.object.model.LottoGameState;
 import pl.susfenix.course.frontend.desktop.layout.Logger;
 
 import javax.swing.*;
@@ -12,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.Set;
 import java.util.TreeSet;
 
-public class ObjectLottoPanel extends JPanel {
+public class LottoPanel extends JPanel {
     private final Logger logger = Logger.INSTANCE;
 
     private final JCheckBox[] checkBoxes;
@@ -22,7 +20,7 @@ public class ObjectLottoPanel extends JPanel {
     private final JButton randomActionButton;
     private final JLabel wonMoneyLabel;
 
-    public ObjectLottoPanel() {
+    public LottoPanel() {
         this.userNumbersLabel = new JLabel("Liczby użytkownika: ");
         this.resultLabel = new JLabel("Trafiłeś: ");
         this.winnerNumbersLabel = new JLabel("Wylosowane liczby: ");
@@ -40,7 +38,7 @@ public class ObjectLottoPanel extends JPanel {
     }
 
     private void initialize() {
-        final JPanel numbersPanel = new JPanel(new GridLayout(7, 7, 2, 2));
+        final JPanel numbersPanel = new JPanel(new GridLayout(7, 7,2,2));
         for (JCheckBox checkBox : checkBoxes) {
             numbersPanel.add(checkBox);
         }
@@ -64,7 +62,7 @@ public class ObjectLottoPanel extends JPanel {
         JPanel wonMoneyPanel = new JPanel();
         wonMoneyPanel.add(wonMoneyLabel);
 
-        final JPanel controlPanel = new JPanel(new GridLayout(5, 1, 2, 2));
+        final JPanel controlPanel = new JPanel(new GridLayout(5, 1,2,2));
         controlPanel.add(actionPanel);
         controlPanel.add(userDataPanel);
         controlPanel.add(winnerDataPanel);
@@ -72,7 +70,7 @@ public class ObjectLottoPanel extends JPanel {
         controlPanel.add(wonMoneyPanel);
 
 
-        super.setLayout(new GridLayout(2, 1, 2, 2));
+        super.setLayout(new GridLayout(2, 1,2,2));
         super.add(numbersPanel, BorderLayout.CENTER);
         super.add(controlPanel, BorderLayout.SOUTH);
     }
@@ -81,31 +79,39 @@ public class ObjectLottoPanel extends JPanel {
         final ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                final Set<Integer> userNumbers = new TreeSet<>();
+                final Set<Integer> selectedNumbers = new TreeSet<>();
 
                 for (JCheckBox checkBox : checkBoxes) {
                     if (checkBox.isSelected()) {
-                        userNumbers.add(Integer.valueOf(checkBox.getText()));
+                        selectedNumbers.add(Integer.valueOf(checkBox.getText()));
                     }
                 }
-                if (userNumbers.size() < 6) {
+                if (selectedNumbers.size() < 6) {
                     JOptionPane.showMessageDialog(null, "Podales mniej niz 6 liczb!");
                     return;
-                } else if (userNumbers.size() > 6) {
+                }
+                else if (selectedNumbers.size() > 6) {
                     JOptionPane.showMessageDialog(null, "Podales wiecej niz 6 liczb!");
                     return;
                 }
 
-                LottoGameState gameState = LottoApi.startGame(userNumbers);
-                userNumbersLabel.setText("Liczby użytkownika:" + gameState.getUserNumbers());
+                userNumbersLabel.setText("Liczby użytkownika: " + selectedNumbers);
+                logger.info("Liczby użytkownika: " + selectedNumbers);
 
-                winnerNumbersLabel.setText("Wylosowane liczby: " + gameState.getComputerNumbers());
+                Set<Integer> computerNumbers = Lotto.retrieveComputerNumbers();
+                winnerNumbersLabel.setText("Wylosowane liczby: " + computerNumbers);
+                logger.info("Wylosowane liczby: " + computerNumbers);
 
-                resultLabel.setText("Liczba trafień wynosi: " + gameState.getHits().size());
+                int countedHits = Lotto.countHits(computerNumbers, selectedNumbers);
+                resultLabel.setText("Liczba trafień wynosi: " + countedHits);
+                logger.info("Liczba trafień wynosi: " + countedHits);
 
-                wonMoneyLabel.setText("Wygrałeś " + gameState.getWonMoney() + " zł.");
+                double winMoney = Lotto.determineWinMoney(countedHits);
+                wonMoneyLabel.setText("Wygrałeś " + winMoney + " zł.");
+                logger.info("Wygrałeś " + winMoney + " zł.");
 
-                logger.info(gameState.toString());
+                //Lotto.startGame(selectedNumbers);
+
             }
         };
         return actionListener;

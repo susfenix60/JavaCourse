@@ -1,16 +1,19 @@
 package pl.susfenix.course.frontend.console;
 
-import pl.susfenix.course.backend.game.lotto.Lotto;
 import pl.susfenix.course.backend.game.tictactoe.TicTacToe;
+import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
 import pl.susfenix.course.backend.simple_java.lesson1.*;
 import pl.susfenix.course.backend.simple_java.lesson2.CollectionTesting;
+import pl.susfenix.course.frontend.console.game.lotto.LottoConsole;
+import pl.susfenix.course.frontend.console.game.tictactoe.TicTacToeConsole;
+import pl.susfenix.course.frontend.console.layout.ScannerHolder;
 
 import java.util.Scanner;
 
 public class ConsoleStarter {
 
     public static void start() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = ScannerHolder.getScanner();
         int userOption = -1;
         while (userOption != 0) {
             System.out.print("""
@@ -57,12 +60,13 @@ public class ConsoleStarter {
                     CollectionTesting.main(null);
                     break;
                 }
-                /*case 7: {
-                    Lotto.main(null);
+                case 7: {
+                    LottoConsole.start();
                     break;
-                }*/
+                }
                 case 8: {
-                    TicTacToe.main(null);
+                    TicTacToeConsole ticTacToeConsole = new TicTacToeConsole();
+                    ticTacToeConsole.start();
                     break;
                 }
 
@@ -71,6 +75,6 @@ public class ConsoleStarter {
                     System.out.print("Wybrano błędną opcję.");
             }
         }
-        //scanner.close();
+        ScannerHolder.close();
     }
 }

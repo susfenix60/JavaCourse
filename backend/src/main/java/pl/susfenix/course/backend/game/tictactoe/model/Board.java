@@ -27,7 +27,7 @@ public class Board {
     @Override
     public String toString() {
 
-        String result = "1 2 3";
+        String result = "1 2 3\n";
 
         for (int currentIndex = 0; currentIndex < 3; currentIndex++) {
             for (int currentIndex2 = 0; currentIndex2 < 3; currentIndex2++) {

@@ -1,8 +1,8 @@
 package pl.susfenix.course.frontend.desktop.layout;
 
 import pl.susfenix.course.frontend.desktop.game.tictactoe.TicTacToePanel;
-import pl.susfenix.course.frontend.desktop.lotto.LottoPanel;
-import pl.susfenix.course.frontend.desktop.lotto.ObjectLottoPanel;
+import pl.susfenix.course.frontend.desktop.game.lotto.LottoPanel;
+import pl.susfenix.course.frontend.desktop.game.lotto.ObjectLottoPanel;
 
 import javax.swing.*;
 import java.awt.*;
