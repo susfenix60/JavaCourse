@@ -1,5 +1,6 @@
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\logic\TicTacToeApi.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson2\object\pesel\PeselValidator.java
+D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\model\PlayerType.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\lotto\object\model\LottoGameState2.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\model\GameStatus.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson2\object\pesel\ObjectPeselInformation.java
@@ -8,7 +9,9 @@ D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\g
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson1\StringFunner.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson1\SimpleCalculator.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\model\Player.java
+D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\logic\player\SmartComputerPlayerMover.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson2\PeselInformation.java
+D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\logic\player\DumbComputerPlayerMover.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\game\tictactoe\model\Board.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson1\StringAsciManipulation.java
 D:\WORKSPACE\codes\JavaCourse\backend\src\main\java\pl\susfenix\course\backend\simple_java\lesson2\object\pesel\model\PeselData.java

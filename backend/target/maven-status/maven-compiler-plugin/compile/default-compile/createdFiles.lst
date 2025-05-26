@@ -16,10 +16,13 @@ pl\susfenix\course\backend\game\lotto\object\model\LottoGameState$Builder.class
 pl\susfenix\course\backend\game\tictactoe\logic\TicTacToeFactory.class
 pl\susfenix\course\backend\simple_java\lesson1\StringAsciManipulation.class
 pl\susfenix\course\backend\game\tictactoe\logic\TicTacToeApi.class
+pl\susfenix\course\backend\game\tictactoe\logic\player\SmartComputerPlayerMover.class
 pl\susfenix\course\backend\game\tictactoe\model\TicTacToeGameState.class
 pl\susfenix\course\backend\simple_java\lesson2\PeselInformation.class
+pl\susfenix\course\backend\game\tictactoe\logic\player\DumbComputerPlayerMover.class
 pl\susfenix\course\backend\game\tictactoe\model\GameStatus.class
 pl\susfenix\course\backend\simple_java\lesson2\object\pesel\model\PeselData.class
+pl\susfenix\course\backend\game\tictactoe\model\PlayerType.class
 pl\susfenix\course\backend\game\tictactoe\model\Board.class
 pl\susfenix\course\backend\simple_java\lesson1\ConsoleStarter.class
 pl\susfenix\course\backend\simple_java\lesson2\object\pesel\PeselValidator.class

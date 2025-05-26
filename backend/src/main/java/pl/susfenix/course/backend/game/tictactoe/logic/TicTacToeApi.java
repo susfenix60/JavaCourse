@@ -1,16 +1,20 @@
 package pl.susfenix.course.backend.game.tictactoe.logic;
 
+import pl.susfenix.course.backend.game.tictactoe.logic.player.DumbComputerPlayerMover;
+import pl.susfenix.course.backend.game.tictactoe.logic.player.SmartComputerPlayerMover;
 import pl.susfenix.course.backend.game.tictactoe.model.*;
-
-import java.util.Scanner;
 
 public class TicTacToeApi {
     private TicTacToeGameState gameState;
     private final Player[] allPlayers;
+    private final SmartComputerPlayerMover smartComputerPlayerMover;
+    private final DumbComputerPlayerMover dumbComputerPlayerMover;
 
-    public TicTacToeApi(TicTacToeGameState gameState, Player[] allPlayers) {
+    public TicTacToeApi(TicTacToeGameState gameState, Player[] allPlayers, SmartComputerPlayerMover smartComputerPlayerMover, DumbComputerPlayerMover dumbComputerPlayerMover) {
         this.gameState = gameState;
         this.allPlayers = allPlayers;
+        this.smartComputerPlayerMover = smartComputerPlayerMover;
+        this.dumbComputerPlayerMover = dumbComputerPlayerMover;
     }
 
     public TicTacToeGameState getGameState() {
@@ -18,6 +22,20 @@ public class TicTacToeApi {
     }
 
     public TicTacToeGameState makeMove(int rowPosition, int colPosition) {
+        PlayerType currentPlayer = gameState.getCurrentPlayer().getType();
+        if (currentPlayer.equals(PlayerType.HUMAN)) {
+            return makeMoveWithPosition(rowPosition, colPosition);
+        }
+        else if (currentPlayer.equals(PlayerType.DUMB_COMPUTER)) {
+            int[] playerMove = dumbComputerPlayerMover.designatePosition(this);
+            return makeMoveWithPosition(playerMove[0], playerMove[1]);
+        }
+        else {
+            int[] playerMove = smartComputerPlayerMover.designatePosition(this);
+            return makeMoveWithPosition(playerMove[0], playerMove[1]);
+        }
+    }
+    private TicTacToeGameState makeMoveWithPosition(int rowPosition, int colPosition) {
 
         if (!isMovePossible(rowPosition, colPosition)) {
             throw new IllegalArgumentException("Yor move can NOT be done.");

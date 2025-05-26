@@ -3,6 +3,7 @@ package pl.susfenix.course.frontend.desktop.game.tictactoe;
 import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
 import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFactory;
 import pl.susfenix.course.backend.game.tictactoe.model.GameStatus;
+import pl.susfenix.course.backend.game.tictactoe.model.PlayerType;
 import pl.susfenix.course.backend.game.tictactoe.model.TicTacToeGameState;
 import pl.susfenix.course.backend.game.tictactoe.model.Player;
 import pl.susfenix.course.frontend.desktop.layout.Logger;
@@ -19,6 +20,7 @@ public class TicTacToePanel extends JPanel {
     private final JButton[][] buttons;
 
     private TicTacToeApi ticTacToeApi;
+
     public TicTacToePanel() {
         super.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
 
@@ -29,7 +31,13 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
-        this.ticTacToeApi = TicTacToeFactory.createInitial();
+        final String[] aiConfigurationData = TicTacToeAiConfigurationDialog.show();
+        if (aiConfigurationData.length == 2) {
+            this.ticTacToeApi = TicTacToeFactory.createInitial(aiConfigurationData[0], aiConfigurationData[1]);
+        } else {
+            this.ticTacToeApi = TicTacToeFactory.createInitial();
+        }
+        log.clear();
         log.info(ticTacToeApi.getGameState().getGameResult().getMessage());
     }
 
@@ -56,34 +64,51 @@ public class TicTacToePanel extends JPanel {
                     log.info("Ruch niedozwolony");
                     return;
                 }
-                final int[] buttonIndexes = findButtonIndex(currentButton);
                 final Player currentPlayer = ticTacToeApi.getGameState().getCurrentPlayer();
+
+                //if (currentPlayer.getType().equals(PlayerType.HUMAN)){
+                    final int[] buttonIndexes = findButtonIndex(currentButton);
+                //}
 
                 final TicTacToeGameState newGameState = ticTacToeApi.makeMove(buttonIndexes[0], buttonIndexes[1]);
 
-                currentButton.setText(String.valueOf(currentPlayer.getSymbol()));
-                currentButton.setEnabled(false);
+                redraw();
 
                 log.info(newGameState.getGameResult().getMessage());
-                if (newGameState.getGameResult().getStatus() == GameStatus.WINNER || newGameState.getGameResult().getStatus() == GameStatus.DRAW){
-                    for (int row = 0; row < buttons.length; row++) {
-                        for (int col = 0; col < buttons.length; col++) {
-                            buttons[row][col].setEnabled(false);
-                        }
-                    }
-                }
             }
         };
         return actionListener;
     }
+
     private int[] findButtonIndex(JButton currentButton) {
         for (int row = 0; row < buttons.length; row++) {
             for (int col = 0; col < buttons.length; col++) {
                 if (buttons[row][col] == currentButton) {
-                    return new int[] {row, col};
+                    return new int[]{row, col};
                 }
             }
         }
         throw new IllegalStateException("Should never happen");
+    }
+
+    private void redraw() {
+
+        char[][] board = ticTacToeApi.getGameState().getBoard().getBoardState();
+        for (int col = 0; col < buttons.length; col++) {
+            for (int row = 0; row < buttons.length; row++) {
+                JButton currentButton = buttons[col][row];
+                currentButton.setText(String.valueOf(board[col][row]));
+                currentButton.setEnabled(currentButton.getText().equals(" "));
+            }
+        }
+
+        TicTacToeGameState newGameState = ticTacToeApi.getGameState();
+        if (newGameState.getGameResult().getStatus() == GameStatus.WINNER || newGameState.getGameResult().getStatus() == GameStatus.DRAW) {
+            for (int row = 0; row < buttons.length; row++) {
+                for (int col = 0; col < buttons.length; col++) {
+                    buttons[row][col].setEnabled(false);
+                }
+            }
+        }
     }
 }
