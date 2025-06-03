@@ -52,9 +52,9 @@
                         <goals>
                             <goal>shade</goal>
                         </goals>
-                        <configuration>
+                        <!--<configuration>
                             <createDependencyReducedPom>true</createDependencyReducedPom>
-                        </configuration>
+                        </configuration>-->
                     </execution>
                 </executions>
             </plugin>
