@@ -8,6 +8,7 @@ pl\susfenix\course\backend\game\lotto\object\model\LottoGameState.class
 pl\susfenix\course\backend\simple_java\lesson1\PalindromResolver.class
 pl\susfenix\course\backend\game\lotto\Lotto.class
 pl\susfenix\course\backend\game\lotto\object\model\LottoGameState2$Builder.class
+pl\susfenix\course\backend\simple_java\codingBat\More20.class
 pl\susfenix\course\backend\simple_java\lesson2\object\pesel\PeselExtractor.class
 pl\susfenix\course\backend\game\lotto\Lotto_old.class
 pl\susfenix\course\backend\game\lotto\object\model\LottoGameState2.class
@@ -20,6 +21,7 @@ pl\susfenix\course\backend\game\tictactoe\logic\player\SmartComputerPlayerMover.
 pl\susfenix\course\backend\game\tictactoe\model\TicTacToeGameState.class
 pl\susfenix\course\backend\simple_java\lesson2\PeselInformation.class
 pl\susfenix\course\backend\game\tictactoe\logic\player\DumbComputerPlayerMover.class
+pl\susfenix\course\backend\simple_java\codingBat\Blackjack.class
 pl\susfenix\course\backend\game\tictactoe\model\GameStatus.class
 pl\susfenix\course\backend\simple_java\lesson2\object\pesel\model\PeselData.class
 pl\susfenix\course\backend\game\tictactoe\model\PlayerType.class
