@@ -1,3 +1,4 @@
+/*
 package pl.susfenix.course.backend.simple_java.extra;
 
 import java.util.Random;
@@ -9,7 +10,14 @@ public class BlackJackRemastered {
 
     public static void main(String[] args){
 
-        retrieveComputerNumbers();
+        Integer  randN = retrieveComputerNumbers();
+
+        while (retrieveComputerNumbers() > 11){
+
+            retrieveComputerNumbers();
+        }
+
+
         int playerSum = 0;
 
         System.out.println("Lets play Blackjack");
@@ -53,4 +61,8 @@ public class BlackJackRemastered {
         return computerNumbers;
     }
 
+
+
+
 }
+*/
