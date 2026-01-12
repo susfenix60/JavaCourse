@@ -1,6 +1,6 @@
 package pl.susfenix.course.backend.game.tictactoe.logic.player;
 
-import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
+import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFacade;
 //import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.IOException;
@@ -30,15 +30,15 @@ public class SmartComputerPlayerMover {
         this.dummyComputerPlayerMover = dummyComputerPlayerMover;
     }
 
-    public int[] designatePosition(TicTacToeApi ticTacToeApi) {
+    public int[] designatePosition(TicTacToeFacade ticTacToeFacade) {
         if (token.isBlank()) {
-            return dummyComputerPlayerMover.designatePosition(ticTacToeApi);
+            return dummyComputerPlayerMover.designatePosition(ticTacToeFacade);
         }
 
         String authorizationToken = this.token;
         String message = "Current board (3x3 grid, row by row):  \n"
-                + ticTacToeApi.getGameState().getBoard().toString() + "\n"
-                + "Player to move: " + ticTacToeApi.getGameState().getCurrentPlayer().getSymbol() + "\n"
+                + ticTacToeFacade.getGameState().getBoard().toString() + "\n"
+                + "Player to move: " + ticTacToeFacade.getGameState().getCurrentPlayer().getSymbol() + "\n"
                 + "Return ONLY the best possible move (you are a master of this game) as JSON coordinates {move: [row, col]} where rows/cols are 0-2. So [3,3] does not exists";
 
         message = org.apache.commons.text.StringEscapeUtils.escapeJson(message);
@@ -56,7 +56,7 @@ public class SmartComputerPlayerMover {
 
                 extractedMove = extractMove(chatResponse);
 
-                isMovePossible = ticTacToeApi.isMovePossible(extractedMove[0], extractedMove[1]);
+                isMovePossible = ticTacToeFacade.isMovePossible(extractedMove[0], extractedMove[1]);
                 if (!isMovePossible) {
                     currentRetry++;
                 }
@@ -65,12 +65,12 @@ public class SmartComputerPlayerMover {
             System.out.println("Error when get AI chat move. " + ex.getMessage());
             ex.printStackTrace();
             System.out.println("Make dummy move");
-            return dummyComputerPlayerMover.designatePosition(ticTacToeApi);
+            return dummyComputerPlayerMover.designatePosition(ticTacToeFacade);
         }
 
         if (!isMovePossible) {
             System.out.println("AI chat try " + MAX_RETRY + " times move that is not possible. Make dummy move");
-            return dummyComputerPlayerMover.designatePosition(ticTacToeApi);
+            return dummyComputerPlayerMover.designatePosition(ticTacToeFacade);
         }
 
         return extractedMove;

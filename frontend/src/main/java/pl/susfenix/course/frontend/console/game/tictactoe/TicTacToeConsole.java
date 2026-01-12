@@ -1,7 +1,6 @@
 package pl.susfenix.course.frontend.console.game.tictactoe;
 
-import pl.susfenix.course.backend.game.lotto.object.logic.LottoApi;
-import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
+import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFacade;
 import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFactory;
 import pl.susfenix.course.backend.game.tictactoe.model.GameStatus;
 import pl.susfenix.course.backend.game.tictactoe.model.Player;
@@ -11,14 +10,14 @@ import pl.susfenix.course.frontend.console.layout.ScannerHolder;
 import java.util.Scanner;
 
 public class TicTacToeConsole {
-    private final TicTacToeApi ticTacToeApi;
+    private final TicTacToeFacade ticTacToeFacade;
 
     public TicTacToeConsole() {
-        this.ticTacToeApi = TicTacToeFactory.createInitial();
+        this.ticTacToeFacade = TicTacToeFactory.createInitial();
     }
 
     public void start() {
-        TicTacToeGameState gameState = ticTacToeApi.getGameState();
+        TicTacToeGameState gameState = ticTacToeFacade.getGameState();
 
         Player playerBeforeMove = null;
         while (gameState.getGameResult().getStatus().equals(GameStatus.IN_GAME) || gameState.getGameResult().getStatus().equals(GameStatus.INICIALAZED)) {
@@ -28,7 +27,7 @@ public class TicTacToeConsole {
             System.out.println("Current player is " + currentPlayer);
 
             int[] playerPosition = retrievePlayerPosition();
-            gameState = this.ticTacToeApi.makeMove(playerPosition[0], playerPosition[1]);
+            gameState = this.ticTacToeFacade.makeMove(playerPosition[0], playerPosition[1]);
         }
 
         System.out.println(gameState.getBoard());
@@ -56,7 +55,7 @@ public class TicTacToeConsole {
             System.out.print ("Please give me column position from 1 to 3.  ");
             colPosition = scanner.nextInt();
 
-            if (!this.ticTacToeApi.isMovePossible(rowPosition - 1, colPosition - 1)) {
+            if (!this.ticTacToeFacade.isMovePossible(rowPosition - 1, colPosition - 1)) {
                 System.out.println("Your move can NOT be done, please select other position.");
                 rowPosition = -1;
                 colPosition = -1;

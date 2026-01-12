@@ -1,9 +1,8 @@
 package pl.susfenix.course.frontend.desktop.game.tictactoe;
 
-import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
+import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFacade;
 import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeFactory;
 import pl.susfenix.course.backend.game.tictactoe.model.GameStatus;
-import pl.susfenix.course.backend.game.tictactoe.model.PlayerType;
 import pl.susfenix.course.backend.game.tictactoe.model.TicTacToeGameState;
 import pl.susfenix.course.backend.game.tictactoe.model.Player;
 import pl.susfenix.course.frontend.desktop.layout.Logger;
@@ -19,7 +18,7 @@ public class TicTacToePanel extends JPanel {
     private static final int BOARD_SIZE = 3;
     private final JButton[][] buttons;
 
-    private TicTacToeApi ticTacToeApi;
+    private TicTacToeFacade ticTacToeFacade;
 
     public TicTacToePanel() {
         super.setLayout(new GridLayout(BOARD_SIZE, BOARD_SIZE));
@@ -33,12 +32,12 @@ public class TicTacToePanel extends JPanel {
 
         final String[] aiConfigurationData = TicTacToeAiConfigurationDialog.show();
         if (aiConfigurationData.length == 2) {
-            this.ticTacToeApi = TicTacToeFactory.createInitial(aiConfigurationData[0], aiConfigurationData[1]);
+            this.ticTacToeFacade = TicTacToeFactory.createInitial(aiConfigurationData[0], aiConfigurationData[1]);
         } else {
-            this.ticTacToeApi = TicTacToeFactory.createInitial();
+            this.ticTacToeFacade = TicTacToeFactory.createInitial();
         }
         log.clear();
-        log.info(ticTacToeApi.getGameState().getGameResult().getMessage());
+        log.info(ticTacToeFacade.getGameState().getGameResult().getMessage());
     }
 
     private JButton[][] initializeButtons() {
@@ -64,13 +63,13 @@ public class TicTacToePanel extends JPanel {
                     log.info("Ruch niedozwolony");
                     return;
                 }
-                final Player currentPlayer = ticTacToeApi.getGameState().getCurrentPlayer();
+                final Player currentPlayer = ticTacToeFacade.getGameState().getCurrentPlayer();
 
                 //if (currentPlayer.getType().equals(PlayerType.HUMAN)){
                     final int[] buttonIndexes = findButtonIndex(currentButton);
                 //}
 
-                final TicTacToeGameState newGameState = ticTacToeApi.makeMove(buttonIndexes[0], buttonIndexes[1]);
+                final TicTacToeGameState newGameState = ticTacToeFacade.makeMove(buttonIndexes[0], buttonIndexes[1]);
 
                 redraw();
 
@@ -93,7 +92,7 @@ public class TicTacToePanel extends JPanel {
 
     private void redraw() {
 
-        char[][] board = ticTacToeApi.getGameState().getBoard().getBoardState();
+        char[][] board = ticTacToeFacade.getGameState().getBoard().getBoardState();
         for (int col = 0; col < buttons.length; col++) {
             for (int row = 0; row < buttons.length; row++) {
                 JButton currentButton = buttons[col][row];
@@ -102,7 +101,7 @@ public class TicTacToePanel extends JPanel {
             }
         }
 
-        TicTacToeGameState newGameState = ticTacToeApi.getGameState();
+        TicTacToeGameState newGameState = ticTacToeFacade.getGameState();
         if (newGameState.getGameResult().getStatus() == GameStatus.WINNER || newGameState.getGameResult().getStatus() == GameStatus.DRAW) {
             for (int row = 0; row < buttons.length; row++) {
                 for (int col = 0; col < buttons.length; col++) {

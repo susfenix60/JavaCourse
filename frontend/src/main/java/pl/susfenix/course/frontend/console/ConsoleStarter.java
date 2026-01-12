@@ -1,7 +1,5 @@
 package pl.susfenix.course.frontend.console;
 
-import pl.susfenix.course.backend.game.tictactoe.TicTacToe;
-import pl.susfenix.course.backend.game.tictactoe.logic.TicTacToeApi;
 import pl.susfenix.course.backend.simple_java.lesson1.*;
 import pl.susfenix.course.backend.simple_java.lesson2.CollectionTesting;
 import pl.susfenix.course.frontend.console.game.lotto.LottoConsole;

@@ -6,10 +6,10 @@ import pl.susfenix.course.backend.game.tictactoe.model.*;
 
 public class TicTacToeFactory {
 
-    public static TicTacToeApi createInitial(){
+    public static TicTacToeFacade createInitial(){
         return createInitial("", "");
     }
-    public static TicTacToeApi createInitial(String token, String endpoint){
+    public static TicTacToeFacade createInitial(String token, String endpoint){
 
         final Player[] allPlayers = Player.values();
         final char[][] boardState = new char[][]{
@@ -27,7 +27,7 @@ public class TicTacToeFactory {
 
         DumbComputerPlayerMover dumbComputerPlayerMover = new DumbComputerPlayerMover();
         SmartComputerPlayerMover smartComputerPlayerMover = new SmartComputerPlayerMover(token, endpoint, dumbComputerPlayerMover);
-        return new TicTacToeApi(gameState, allPlayers, smartComputerPlayerMover, dumbComputerPlayerMover);
+        return new TicTacToeFacade(gameState, allPlayers, smartComputerPlayerMover, dumbComputerPlayerMover);
 
     }
 
