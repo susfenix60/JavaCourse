@@ -33,4 +33,28 @@ public class Board {
                 "grid=" + Arrays.toString(grid) +
                 '}';
     }
+
+    public Pawn get(Position positon){
+
+        return this.grid[positon.getCol()][positon.getRow()];
+
+    }
+
+    public void setPosition(Position position, Pawn pawn){
+
+        this.grid[position.getCol()][position.getRow()] = pawn;
+
+    }
+
+    public void clear(Position position){
+
+        this.grid[position.getCol()][position.getRow()] = null;
+
+    }
+
+    public boolean isEmpty(Position position){
+
+        return get(position) == null;
+
+    }
 }

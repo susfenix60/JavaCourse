@@ -20,6 +20,4 @@ public enum Player {
                 '}';
     }
 
-
-
 }

@@ -14,6 +14,12 @@ public class Pawn {
         this.position = position;
     }
 
+    public Pawn(Player owner, Position position) {
+
+        this(PawnType.NORMAL, owner, position);
+
+    }
+
     public PawnType getPawnType() {
         return pawnType;
     }
@@ -47,4 +53,19 @@ public class Pawn {
                 ", position=" + position +
                 '}';
     }
+
+    public static Pawn createForWhitePlayer (Position position) {
+
+        return new Pawn(Player.WHITE, position);
+
+
+    }
+    public static Pawn createForBlackPlayer (Position position){
+
+        return new Pawn(Player.BLACK, position);
+
+
+    }
+
+
 }
